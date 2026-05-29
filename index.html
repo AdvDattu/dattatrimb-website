@@ -257,6 +257,15 @@ footer{background:#040810;border-top:1px solid rgba(212,168,67,0.08);padding:56p
 .fbot{border-top:1px solid rgba(255,255,255,0.04);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
 .fbot p{color:var(--muted);font-size:11.5px;}
 
+/* ── BCI COMPLIANCE BANNER ── */
+#bci-banner{background:linear-gradient(135deg,#1a1200,#2a1e00);border-bottom:2px solid rgba(212,168,67,0.35);padding:12px 4%;position:relative;z-index:850;}
+.bci-inner{max-width:1400px;margin:0 auto;display:flex;align-items:flex-start;gap:12px;}
+.bci-inner > i{color:var(--gold);font-size:18px;flex-shrink:0;margin-top:2px;}
+.bci-inner p{font-size:12px;color:rgba(232,196,106,0.85);line-height:1.7;flex:1;}
+.bci-inner p strong{color:var(--gold);}
+.bci-inner button{background:none;border:1px solid rgba(212,168,67,0.3);color:var(--gold);width:24px;height:24px;border-radius:4px;cursor:pointer;font-size:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all var(--tr);}
+.bci-inner button:hover{background:rgba(212,168,67,0.15);}
+
 /* ── DEVELOPER CREDIT BAND ── */
 .dev-band{
   background:linear-gradient(135deg,var(--navy3),var(--navy4));
@@ -269,8 +278,9 @@ footer{background:#040810;border-top:1px solid rgba(212,168,67,0.08);padding:56p
 }
 .dev-left{display:flex;align-items:center;gap:14px;}
 .dev-left > i{color:var(--gold);font-size:22px;flex-shrink:0;}
-.dev-label{display:block;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;}
-.dev-name{font-size:15px;font-weight:700;color:var(--white);}
+.dev-label{display:block;font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;}
+.dev-name{font-size:15px;font-weight:700;color:var(--white);display:block;}
+.dev-sub{display:block;font-size:11px;color:var(--gold);margin-top:2px;}
 .dev-right{display:flex;gap:10px;flex-wrap:wrap;}
 .dev-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:all var(--tr);}
 .dev-call{background:rgba(139,26,26,0.15);border:1px solid rgba(139,26,26,0.3);color:#f87171;}
