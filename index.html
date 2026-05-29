@@ -879,67 +879,88 @@ function closeM(){
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('ldr').classList.add('gone'),500));
 
 // ═══════════════════════════════════════════
-// MAPS & DIRECTIONS — Auto From + To
+// MAPS & DIRECTIONS
+// Destination: "Dattatri advocate" already listed on Google Maps
+// Coordinates: 17.88841, 77.51266 (Mailur Rd, Basava Nagar, Bidar)
 // ═══════════════════════════════════════════
-const OFFICE_LAT = 17.88841;
-const OFFICE_LNG = 77.51266;
-const OFFICE_LABEL = 'Dattatri+MB+%26+Co.,+Kashibai+Layout,+Bidar';
+const OFFICE_LAT  = 17.88841;
+const OFFICE_LNG  = 77.51266;
+// Use the exact place name from Google Maps listing for most reliable match
+const OFFICE_DEST = 'Dattatri+advocate,+Mailur+Road,+Basava+Nagar,+Bidar,+Karnataka';
 
-function showLocStatus(msg, type){
+function showLocStatus(msg, type) {
   const el = document.getElementById('locStatus');
-  if(!el) return;
+  if (!el) return;
   el.style.display = 'flex';
   el.className = 'loc-status ' + type;
-  el.innerHTML = (type==='info' ? '<i class="fas fa-spinner fa-spin"></i>' :
-                  type==='ok'   ? '<i class="fas fa-check-circle"></i>' :
-                                  '<i class="fas fa-exclamation-circle"></i>') + ' ' + msg;
-  if(type !== 'info') setTimeout(()=>{ el.style.display='none'; }, 5000);
+  const icon = type==='info'  ? '<i class="fas fa-spinner fa-spin"></i>'
+             : type==='ok'    ? '<i class="fas fa-check-circle"></i>'
+             :                  '<i class="fas fa-exclamation-circle"></i>';
+  el.innerHTML = icon + ' ' + msg;
+  if (type !== 'info') setTimeout(() => { el.style.display = 'none'; }, 6000);
 }
 
-function launchDirections(fromLat, fromLng){
-  const dest   = `${OFFICE_LAT},${OFFICE_LNG}`;
+function launchDirections(fromLat, fromLng) {
   const isIOS     = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const isAndroid = /Android/.test(navigator.userAgent);
+  const destCoord = `${OFFICE_LAT},${OFFICE_LNG}`;
 
-  if(fromLat){
+  if (fromLat && fromLng) {
     const origin = `${fromLat},${fromLng}`;
-    // Universal Google Maps directions URL — recognised by both app & browser
-    const googleUrl = `https://www.google.com/maps/dir/${origin}/${dest}`;
-    const appleUrl  = `maps://maps.apple.com/?saddr=${origin}&daddr=${dest}&dirflg=d`;
-    const intentUrl = `intent://maps.google.com/maps?saddr=${origin}&daddr=${dest}&dirflg=d#Intent;scheme=https;package=com.google.android.apps.maps;end`;
 
-    if(isIOS){
-      window.location.href = appleUrl;
-      setTimeout(()=>window.open(googleUrl,'_blank'), 1500);
-    } else if(isAndroid){
-      window.location.href = intentUrl;
-      setTimeout(()=>window.open(googleUrl,'_blank'), 1500);
+    // ── Best URL for each platform ──────────────────────────────
+    // Google Maps Directions API URL — works in browser AND opens app if installed
+    const googleDir = `https://www.google.com/maps/dir/?api=1`
+      + `&origin=${origin}`
+      + `&destination=${destCoord}`
+      + `&travelmode=driving`;
+
+    // Apple Maps for iOS (native app)
+    const appleDir = `maps://maps.apple.com/?saddr=${origin}`
+      + `&daddr=${destCoord}`
+      + `&dirflg=d`;
+
+    if (isIOS) {
+      // Try Apple Maps first; if not available fallback to Google Maps
+      const start = Date.now();
+      window.location.href = appleDir;
+      setTimeout(() => {
+        if (Date.now() - start < 2000) window.open(googleDir, '_blank');
+      }, 1000);
     } else {
-      window.open(googleUrl,'_blank');
+      // Android + Desktop — Google Maps handles both app & browser automatically
+      window.open(googleDir, '_blank');
     }
-    showLocStatus('Opening directions from your location to the office.', 'ok');
+
+    showLocStatus('✅ Opening turn-by-turn directions from your location!', 'ok');
+
   } else {
-    // No GPS — open with destination only, user sets their own origin in Maps
-    const fallback = `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving`;
-    const appleFallback = `maps://maps.apple.com/?daddr=${dest}&dirflg=d`;
-    if(isIOS){
-      window.location.href = appleFallback;
-      setTimeout(()=>window.open(fallback,'_blank'), 1500);
+    // No GPS — open Google Maps with destination pinned, user types their start
+    const googlePin = `https://www.google.com/maps/dir/?api=1`
+      + `&destination=${destCoord}`
+      + `&travelmode=driving`;
+    const applePin  = `maps://maps.apple.com/?daddr=${destCoord}&dirflg=d`;
+
+    if (isIOS) {
+      window.location.href = applePin;
+      setTimeout(() => window.open(googlePin, '_blank'), 1000);
     } else {
-      window.open(fallback,'_blank');
+      window.open(googlePin, '_blank');
     }
-    showLocStatus('Opened Google Maps. Enter your starting point to get directions.', 'err');
+    showLocStatus('ℹ️ Maps opened. Please enter your starting location.', 'err');
   }
 }
 
-function getDirections(){
+function getDirections() {
   const btn = document.getElementById('dirBtn');
-  if(!btn) return;
-  btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Getting location…</span>';
-  showLocStatus('Detecting your current location…', 'info');
+  if (!btn) return;
 
-  if(!navigator.geolocation){
+  // Button loading state
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Finding you…</span>';
+  showLocStatus('📍 Detecting your current location…', 'info');
+
+  if (!navigator.geolocation) {
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-route"></i> <span>Get Directions</span>';
     launchDirections(null, null);
@@ -952,32 +973,21 @@ function getDirections(){
       btn.innerHTML = '<i class="fas fa-route"></i> <span>Get Directions</span>';
       launchDirections(pos.coords.latitude, pos.coords.longitude);
     },
-    err => {
+    () => {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-route"></i> <span>Get Directions</span>';
-      // Location denied — open maps anyway with destination pinned
       launchDirections(null, null);
     },
-    { enableHighAccuracy: true, timeout: 8000, maximumAge: 30000 }
+    { enableHighAccuracy: true, timeout: 9000, maximumAge: 30000 }
   );
 }
 
-// "View on Map" button — also uses live location for context
-document.getElementById('viewMapBtn')?.addEventListener('click', function(e){
+// ── "View on Map" button ─────────────────────────────────────────
+document.getElementById('viewMapBtn')?.addEventListener('click', function(e) {
   e.preventDefault();
-  const dest = `${OFFICE_LAT},${OFFICE_LNG}`;
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        const near = `@${pos.coords.latitude},${pos.coords.longitude},14z`;
-        window.open(`https://www.google.com/maps/place/${dest}/${near}`,'_blank');
-      },
-      () => window.open(`https://maps.google.com/?q=${dest}`,'_blank'),
-      { timeout: 5000 }
-    );
-  } else {
-    window.open(`https://maps.google.com/?q=${dest}`,'_blank');
-  }
+  // Opens the exact Google Maps listing for "Dattatri advocate"
+  const url = `https://www.google.com/maps/search/?api=1&query=${OFFICE_DEST}`;
+  window.open(url, '_blank');
 });
 </script>
 </body>
