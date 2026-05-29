@@ -1,0 +1,206 @@
+{
+  "firm": {
+    "name": "Dattatri MB & Co.",
+    "tagline": "Advocates & Consultants",
+    "description": "Top Lawyers in Bidar with 6+ years of experience in Civil, Criminal, Family, Real Estate, Corporate & Matrimonial Laws.",
+    "established": "2018",
+    "barCouncilNo": "KAR/1234/2018",
+    "logo": "assets/images/logo.png"
+  },
+
+  "advocate": {
+    "name": "Dattatri M. Benaknalli",
+    "title": "Senior Advocate & Legal Consultant",
+    "photo": "assets/images/advocate.jpg",
+    "bio1": "Dattatri MB & Co. is recognized as one of the top law firms in Bidar, with deep expertise in Civil, Criminal, Family, Real Estate, Corporate, and Matrimonial laws. We are renowned for our strong representation in JMFC and CJM Courts of Bidar.",
+    "bio2": "We provide trusted and tailored legal services ensuring excellence and client satisfaction — excelling at handling the toughest cases across Bidar with special attention to detail and quick resolutions."
+  },
+
+  "stats": [
+    { "number": "6+",  "label": "Years Experience" },
+    { "number": "500+","label": "Cases Handled"    },
+    { "number": "7",   "label": "Practice Areas"   },
+    { "number": "100%","label": "Commitment"       }
+  ],
+
+  "contact": {
+    "phone": "9620471555",
+    "phoneDisplay": "+91 96204 71555",
+    "whatsapp": "919620471555",
+    "email": "dattatri@dattatrimb.in",
+    "address": "H.No. 17-4-365/1A, Near Vishweshwarayya Garden, Kashibai Layout, Opp. Gumpa, Bidar – 585403, Karnataka",
+    "hours": "Monday – Saturday: 10:00 AM – 7:00 PM",
+    "hoursNote": "Sunday: By Appointment Only",
+    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60809.82!2d77.4878!3d17.9127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bceb50b3b3b3b3b%3A0!2sBidar%2C+Karnataka!5e0!3m2!1sen!2sin!4v1"
+  },
+
+  "social": {
+    "facebook": "https://facebook.com/dattatrimb",
+    "instagram": "https://instagram.com/dattatrimb",
+    "linkedin": "https://linkedin.com/in/dattatrimb",
+    "whatsapp": "https://wa.me/919620471555"
+  },
+
+  "services": [
+    {
+      "icon": "fa-building-columns",
+      "title": "Municipal & District Court Matters",
+      "desc": "Expert representation and litigation support across all Municipal and District Court proceedings in Bidar."
+    },
+    {
+      "icon": "fa-landmark",
+      "title": "Civil Lawyers",
+      "desc": "Property disputes, contractual issues, recovery suits, injunctions, partition & title disputes in civil courts."
+    },
+    {
+      "icon": "fa-handcuffs",
+      "title": "Criminal Lawyers",
+      "desc": "Bail applications, FIR quashing, criminal defense, trial strategy, and legal remedies across all courts."
+    },
+    {
+      "icon": "fa-heart-crack",
+      "title": "Divorce & Family Lawyers",
+      "desc": "Mutual & contested divorce, child custody, alimony, maintenance, and domestic violence matters."
+    },
+    {
+      "icon": "fa-rings-wedding",
+      "title": "Court Marriage & Registration",
+      "desc": "Complete assistance for court marriages and official marriage registration procedures in Bidar."
+    },
+    {
+      "icon": "fa-file-signature",
+      "title": "Agreements, Affidavits & Notary",
+      "desc": "All types of legal agreements, affidavit drafting, and notary services handled with precision."
+    },
+    {
+      "icon": "fa-briefcase",
+      "title": "Company Registration",
+      "desc": "Seamless assistance in company formation, registration, and corporate compliance in Bidar."
+    },
+    {
+      "icon": "fa-comments",
+      "title": "Consultant – All Matters",
+      "desc": "Expert legal consultation across all domains — get the right advice before you take action."
+    }
+  ],
+
+  "practiceAreas": [
+    {
+      "icon": "fa-handcuffs",
+      "title": "Criminal Law Services",
+      "items": [
+        "Regular Bails (Sec. 436, 437 & 439 CRPC)",
+        "Anticipatory Bails – Sessions, High Court & Supreme Court",
+        "Criminal Appeals & Revision Petitions",
+        "482 Quashing Petitions",
+        "Murder, Dowry Deaths, NDPS/Drugs Cases",
+        "POCSO & Sexual Offence Cases",
+        "Cyber Crime & IT Act Cases",
+        "Lokayukta / CBI / NIA / ED / EOW Cases",
+        "UAPA, KCOCA & KIPD Special Cases",
+        "498A IPC & Defamation Cases",
+        "SC & ST Act Cases",
+        "MVC & Legal Aid Matters"
+      ]
+    },
+    {
+      "icon": "fa-landmark",
+      "title": "Civil Law",
+      "items": [
+        "Property & Title Disputes",
+        "Partition Suits",
+        "Recovery Suits",
+        "Contractual Disputes",
+        "Injunction Matters",
+        "Civil Litigations in High Courts"
+      ]
+    },
+    {
+      "icon": "fa-users",
+      "title": "Family & Divorce Law",
+      "items": [
+        "Mutual & Contested Divorce",
+        "Child Custody Matters",
+        "Maintenance & Alimony",
+        "Domestic Violence Cases",
+        "Court Marriage Registration"
+      ]
+    },
+    {
+      "icon": "fa-building",
+      "title": "Corporate & NCLT Law",
+      "items": [
+        "Insolvency & Bankruptcy Cases",
+        "NCLT Cases in Bidar",
+        "IP Infringement",
+        "Contract Drafting",
+        "Arbitration & Mediation",
+        "Company Registration"
+      ]
+    },
+    {
+      "icon": "fa-house",
+      "title": "Property Law",
+      "items": [
+        "Property Verification & Due Diligence",
+        "Title Verification",
+        "Encumbrance Certificate",
+        "Document Verification",
+        "Expert Court Representation"
+      ]
+    },
+    {
+      "icon": "fa-gavel",
+      "title": "District Session Court",
+      "items": [
+        "Special Strategies & Preliminary Drafting",
+        "Special Petitions Against High Court Rulings",
+        "Session Court Litigations",
+        "Criminal & Civil Sessions"
+      ]
+    }
+  ],
+
+  "whyUs": [
+    { "icon": "fa-trophy",         "title": "6+ Years Experience",  "desc": "Deep expertise handling diverse cases across all courts in Bidar with proven results." },
+    { "icon": "fa-user-shield",    "title": "Client-First Approach","desc": "Your case is our priority. We give personalized attention and tailored legal strategies." },
+    { "icon": "fa-bolt",           "title": "Quick Resolutions",    "desc": "We focus on efficient case handling with special attention to detail for speedy outcomes." },
+    { "icon": "fa-balance-scale",  "title": "Ethical Practice",     "desc": "We uphold the highest standards of legal ethics ensuring fair justice for every client." },
+    { "icon": "fa-map-marker-alt", "title": "Local Expertise",      "desc": "Deep knowledge of JMFC, CJM and District Courts of Bidar for strong local advocacy." },
+    { "icon": "fa-handshake",      "title": "Trusted by Clients",   "desc": "Hundreds of satisfied clients across Bidar trust us for reliable legal representation." }
+  ],
+
+  "testimonials": [
+    {
+      "name": "Rajesh Kumar",
+      "case": "Property Dispute",
+      "text": "Adv. Dattatri handled our property case with exceptional skill. Got a favorable verdict within months. Highly recommended!",
+      "stars": 5
+    },
+    {
+      "name": "Priya Sharma",
+      "case": "Family Matter",
+      "text": "Very professional and compassionate during my divorce case. He guided me through every step with patience and expertise.",
+      "stars": 5
+    },
+    {
+      "name": "Mohammed Farooq",
+      "case": "Criminal Defense",
+      "text": "Got bail within 48 hours. Dattatri sir is extremely knowledgeable about criminal law. Best advocate in Bidar!",
+      "stars": 5
+    }
+  ],
+
+  "seo": {
+    "title": "Dattatri MB & Co. | Top Lawyers in Bidar | Civil, Criminal, Family Law",
+    "description": "Dattatri MB & Co. — Top Lawyers in Bidar with 6+ years experience in Civil, Criminal, Family, Real Estate & Corporate Law. Expert in JMFC & CJM Courts. Call +91 96204 71555.",
+    "keywords": "lawyers in bidar, advocates in bidar, criminal lawyer bidar, civil lawyer bidar, divorce lawyer bidar, property lawyer bidar, best advocate bidar, dattatri mb, legal services bidar karnataka",
+    "ogImage": "assets/images/og-image.jpg",
+    "siteUrl": "https://dattatrimb.netlify.app",
+    "twitterHandle": "@dattatrimb"
+  },
+
+  "formspree": {
+    "endpoint": "https://formspree.io/f/YOUR_FORM_ID"
+  }
+}
