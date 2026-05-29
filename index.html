@@ -878,81 +878,106 @@ function closeM(){
 // ── LOADER ────────────────────────────────
 window.addEventListener('load',()=>setTimeout(()=>document.getElementById('ldr').classList.add('gone'),500));
 
-// ── OPEN IN MAPS — Auto FROM (user location) + TO (office) ──
-const OFFICE = { lat: 17.88841, lng: 77.51266, name: 'Dattatri MB & Co., Kashibai Layout, Bidar' };
+// ═══════════════════════════════════════════
+// MAPS & DIRECTIONS — Auto From + To
+// ═══════════════════════════════════════════
+const OFFICE_LAT = 17.88841;
+const OFFICE_LNG = 77.51266;
+const OFFICE_LABEL = 'Dattatri+MB+%26+Co.,+Kashibai+Layout,+Bidar';
 
-function buildMapsURL(fromLat, fromLng) {
-  const dest   = `${OFFICE.lat},${OFFICE.lng}`;
-  const origin = fromLat ? `${fromLat},${fromLng}` : '';
-  // Universal Google Maps directions URL — works in browser + app on all devices
-  return origin
-    ? `https://www.google.com/maps/dir/${encodeURIComponent(origin)}/${dest}`
-    : `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving`;
+function showLocStatus(msg, type){
+  const el = document.getElementById('locStatus');
+  if(!el) return;
+  el.style.display = 'flex';
+  el.className = 'loc-status ' + type;
+  el.innerHTML = (type==='info' ? '<i class="fas fa-spinner fa-spin"></i>' :
+                  type==='ok'   ? '<i class="fas fa-check-circle"></i>' :
+                                  '<i class="fas fa-exclamation-circle"></i>') + ' ' + msg;
+  if(type !== 'info') setTimeout(()=>{ el.style.display='none'; }, 5000);
 }
 
-function openMaps(fromLat, fromLng) {
-  const url = buildMapsURL(fromLat, fromLng);
+function launchDirections(fromLat, fromLng){
+  const dest   = `${OFFICE_LAT},${OFFICE_LNG}`;
   const isIOS     = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const isAndroid = /Android/.test(navigator.userAgent);
 
-  if (isIOS) {
-    // Try Apple Maps first with directions, fallback to Google Maps
-    const appleUrl = fromLat
-      ? `maps://maps.apple.com/?saddr=${fromLat},${fromLng}&daddr=${OFFICE.lat},${OFFICE.lng}&dirflg=d`
-      : `maps://maps.apple.com/?daddr=${OFFICE.lat},${OFFICE.lng}&dirflg=d`;
-    window.location.href = appleUrl;
-    setTimeout(() => window.open(url, '_blank'), 1200);
-  } else if (isAndroid) {
-    // Android: intent URI opens Google Maps app directly with navigation
-    const intentUrl = fromLat
-      ? `intent://maps.google.com/maps?saddr=${fromLat},${fromLng}&daddr=${OFFICE.lat},${OFFICE.lng}&dirflg=d#Intent;scheme=https;package=com.google.android.apps.maps;end`
-      : `intent://maps.google.com/maps?daddr=${OFFICE.lat},${OFFICE.lng}&dirflg=d#Intent;scheme=https;package=com.google.android.apps.maps;end`;
-    window.location.href = intentUrl;
-    setTimeout(() => window.open(url, '_blank'), 1200);
+  if(fromLat){
+    const origin = `${fromLat},${fromLng}`;
+    // Universal Google Maps directions URL — recognised by both app & browser
+    const googleUrl = `https://www.google.com/maps/dir/${origin}/${dest}`;
+    const appleUrl  = `maps://maps.apple.com/?saddr=${origin}&daddr=${dest}&dirflg=d`;
+    const intentUrl = `intent://maps.google.com/maps?saddr=${origin}&daddr=${dest}&dirflg=d#Intent;scheme=https;package=com.google.android.apps.maps;end`;
+
+    if(isIOS){
+      window.location.href = appleUrl;
+      setTimeout(()=>window.open(googleUrl,'_blank'), 1500);
+    } else if(isAndroid){
+      window.location.href = intentUrl;
+      setTimeout(()=>window.open(googleUrl,'_blank'), 1500);
+    } else {
+      window.open(googleUrl,'_blank');
+    }
+    showLocStatus('Opening directions from your location to the office.', 'ok');
   } else {
-    window.open(url, '_blank');
+    // No GPS — open with destination only, user sets their own origin in Maps
+    const fallback = `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving`;
+    const appleFallback = `maps://maps.apple.com/?daddr=${dest}&dirflg=d`;
+    if(isIOS){
+      window.location.href = appleFallback;
+      setTimeout(()=>window.open(fallback,'_blank'), 1500);
+    } else {
+      window.open(fallback,'_blank');
+    }
+    showLocStatus('Opened Google Maps. Enter your starting point to get directions.', 'err');
   }
 }
 
-function handleMapsClick(e) {
+function getDirections(){
+  const btn = document.getElementById('dirBtn');
+  if(!btn) return;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Getting location…</span>';
+  showLocStatus('Detecting your current location…', 'info');
+
+  if(!navigator.geolocation){
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-route"></i> <span>Get Directions</span>';
+    launchDirections(null, null);
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-route"></i> <span>Get Directions</span>';
+      launchDirections(pos.coords.latitude, pos.coords.longitude);
+    },
+    err => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-route"></i> <span>Get Directions</span>';
+      // Location denied — open maps anyway with destination pinned
+      launchDirections(null, null);
+    },
+    { enableHighAccuracy: true, timeout: 8000, maximumAge: 30000 }
+  );
+}
+
+// "View on Map" button — also uses live location for context
+document.getElementById('viewMapBtn')?.addEventListener('click', function(e){
   e.preventDefault();
-  const btn = e.currentTarget;
-  const origHTML = btn.innerHTML;
-
-  // Show loading state
-  btn.innerHTML = btn.innerHTML.replace(/(<i[^>]*>.*?<\/i>)\s*.*/s,
-    '$1 Getting your location…');
-  btn.style.opacity = '0.75';
-  btn.style.pointerEvents = 'none';
-
-  const reset = () => {
-    btn.innerHTML = origHTML;
-    btn.style.opacity = '';
-    btn.style.pointerEvents = '';
-  };
-
-  if (navigator.geolocation) {
+  const dest = `${OFFICE_LAT},${OFFICE_LNG}`;
+  if(navigator.geolocation){
     navigator.geolocation.getCurrentPosition(
       pos => {
-        reset();
-        openMaps(pos.coords.latitude, pos.coords.longitude);
+        const near = `@${pos.coords.latitude},${pos.coords.longitude},14z`;
+        window.open(`https://www.google.com/maps/place/${dest}/${near}`,'_blank');
       },
-      err => {
-        // Permission denied or unavailable — open with destination only
-        reset();
-        openMaps(null, null);
-      },
-      { timeout: 8000, maximumAge: 60000 }
+      () => window.open(`https://maps.google.com/?q=${dest}`,'_blank'),
+      { timeout: 5000 }
     );
   } else {
-    reset();
-    openMaps(null, null);
+    window.open(`https://maps.google.com/?q=${dest}`,'_blank');
   }
-}
-
-// Attach to ALL "Get Directions" / "Open in Maps" links
-document.querySelectorAll('a[href*="maps.google.com"]').forEach(el => {
-  el.addEventListener('click', handleMapsClick);
 });
 </script>
 </body>
