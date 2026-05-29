@@ -7,7 +7,6 @@
     "barCouncilNo": "KAR/1234/2018",
     "logo": "/assets/images/logo.png"
   },
-
   "advocate": {
     "name": "Dattatri M. Benaknalli",
     "title": "Senior Advocate & Legal Consultant",
@@ -15,14 +14,12 @@
     "bio1": "Dattatri MB & Co. is one of Bidar's most respected law firms, with over six years of dedicated practice in Civil, Criminal, Family, Real Estate, Corporate, and Matrimonial law. The firm holds strong expertise in JMFC and CJM Court proceedings in Bidar, along with District & Sessions Court litigations and Karnataka High Court matters.",
     "bio2": "Fully updated on India's landmark criminal law reforms — the Bharatiya Nyaya Sanhita (BNS), Bharatiya Nagarik Suraksha Sanhita (BNSS) and Bharatiya Sakshya Adhiniyam (BSA) which came into force on July 1, 2024 — the firm delivers modern, informed legal strategies alongside time-tested courtroom advocacy. We are committed to swift resolutions, transparent communication, and ethical practice at every step."
   },
-
   "stats": [
     { "number": "6+",  "label": "Years Experience" },
     { "number": "500+","label": "Cases Handled"    },
     { "number": "7",   "label": "Practice Areas"   },
     { "number": "100%","label": "Commitment"       }
   ],
-
   "contact": {
     "phone": "9620471555",
     "phoneDisplay": "+91 96204 71555",
@@ -31,16 +28,14 @@
     "address": "H.No. 17-4-365/1A, Near Vishweshwarayya Garden, Kashibai Layout, Opp. Gumpa, Bidar – 585403, Karnataka",
     "hours": "Monday – Saturday: 10:00 AM – 7:00 PM",
     "hoursNote": "Sunday: By Appointment Only",
-    "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60809.82!2d77.4878!3d17.9127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bceb50b3b3b3b3b%3A0!2sBidar%2C+Karnataka!5e0!3m2!1sen!2sin!4v1"
+    "mapEmbedUrl": "https://maps.google.com/maps?q=17.88841,77.51266&t=&z=15&ie=UTF8&iwloc=&output=embed"
   },
-
   "social": {
     "facebook": "https://facebook.com/dattatrimb",
     "instagram": "https://instagram.com/dattatrimb",
     "linkedin": "https://linkedin.com/in/dattatrimb",
     "whatsapp": "https://wa.me/919620471555"
   },
-
   "services": [
     {
       "icon": "fa-building-columns",
@@ -83,7 +78,6 @@
       "desc": "Expert legal consultation across all domains — get the right advice before you take action."
     }
   ],
-
   "practiceAreas": [
     {
       "icon": "fa-handcuffs",
@@ -160,7 +154,6 @@
       ]
     }
   ],
-
   "whyUs": [
     { "icon": "fa-trophy",         "title": "6+ Years Experience",  "desc": "Deep expertise handling diverse cases across all courts in Bidar with proven results." },
     { "icon": "fa-user-shield",    "title": "Client-First Approach","desc": "Your case is our priority. We give personalized attention and tailored legal strategies." },
@@ -169,7 +162,6 @@
     { "icon": "fa-map-marker-alt", "title": "Local Expertise",      "desc": "Deep knowledge of JMFC, CJM and District Courts of Bidar for strong local advocacy." },
     { "icon": "fa-handshake",      "title": "Trusted by Clients",   "desc": "Hundreds of satisfied clients across Bidar trust us for reliable legal representation." }
   ],
-
   "testimonials": [
     {
       "name": "Rajesh Kumar",
@@ -190,7 +182,6 @@
       "stars": 5
     }
   ],
-
   "seo": {
     "title": "Dattatri MB & Co. | Top Lawyers in Bidar | Civil, Criminal, Family Law",
     "description": "Dattatri MB & Co. — Top Lawyers in Bidar with 6+ years experience in Civil, Criminal, Family, Real Estate & Corporate Law. Expert in JMFC & CJM Courts. Call +91 96204 71555.",
@@ -199,7 +190,6 @@
     "siteUrl": "https://dattatrimb-website.vercel.app",
     "twitterHandle": "@dattatrimb"
   },
-
   "formspree": {
     "endpoint": "https://formspree.io/f/YOUR_FORM_ID"
   }
